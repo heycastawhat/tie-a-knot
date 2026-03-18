@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Back to Basics — Admin Panel</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0d0d0d;
+      color: #33ff33;
+      font-family: "Courier New", "Consolas", monospace;
+      width: 420px;
+      min-height: 300px;
+      padding: 1rem;
+    }
+    h1 {
+      font-size: 1rem;
+      font-weight: normal;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #1a5c1a;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.85rem;
+    }
+    .stat-value {
+      color: #ffcc00;
+      font-weight: bold;
+    }
+    .section-title {
+      color: #22aa22;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid #1a3a1a;
+      padding-bottom: 0.3rem;
+    }
+    .log-list {
+      max-height: 260px;
+      overflow-y: auto;
+      font-size: 0.75rem;
+      border: 1px solid #1a3a1a;
+      padding: 0.5rem;
+    }
+    .log-list::-webkit-scrollbar { width: 6px; }
+    .log-list::-webkit-scrollbar-track { background: #0a0a0a; }
+    .log-list::-webkit-scrollbar-thumb { background: #1a5c1a; }
+    .log-entry {
+      padding: 0.25rem 0;
+      border-bottom: 1px solid #0f1f0f;
+      word-break: break-all;
+    }
+    .log-entry .time {
+      color: #1a5c1a;
+      font-size: 0.65rem;
+    }
+    .log-entry .url {
+      color: #ff4444;
+      font-size: 0.7rem;
+    }
+    .empty {
+      color: #1a5c1a;
+      font-style: italic;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    .btn {
+      background: none;
+      border: 1px solid #33ff33;
+      color: #33ff33;
+      font-family: inherit;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.8rem;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .btn:hover {
+      background: #33ff33;
+      color: #0a0a0a;
+    }
+    .btn-danger {
+      border-color: #ff4444;
+      color: #ff4444;
+    }
+    .btn-danger:hover {
+      background: #ff4444;
+      color: #0a0a0a;
+    }
+    .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #33ff33;
+      box-shadow: 0 0 6px rgba(51, 255, 51, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <h1>▌ Back to Basics ▐</h1>
+
+  <div class="status">
+    <span class="status-dot"></span>
+    <span>Shield Active — 48 domains blocked</span>
+  </div>
+
+  <div class="stat">
+    <span>Total blocks:</span>
+    <span class="stat-value" id="total-count">0</span>
+  </div>
+  <div class="stat">
+    <span>Log entries:</span>
+    <span class="stat-value" id="log-count">0</span>
+  </div>
+
+  <div class="section-title">Recent Block Log</div>
+  <div class="log-list" id="log-list">
+    <div class="empty">No blocks recorded yet. Scouts are behaving... for now.</div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn" id="btn-refresh">↻ Refresh</button>
+    <button class="btn btn-danger" id="btn-clear">✕ Clear Log</button>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
