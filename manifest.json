@@ -1,12 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Back to Basics",
+  "name": "Tie a Knot",
   "version": "1.0.0",
   "description": "Keeps scouts focused. Redirects game sites to knot tying resources.",
   "permissions": [
     "declarativeNetRequest",
     "declarativeNetRequestWithHostAccess",
     "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "declarative_net_request": {
     "rule_resources": [
@@ -33,9 +36,16 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*.mahitahi.scouts.nz/*", "*://mahitahi.scouts.nz/*"],
+      "js": ["mahitahi.js"],
+      "run_at": "document_end"
+    }
+  ],
   "web_accessible_resources": [
     {
-      "resources": ["redirect.html"],
+      "resources": ["redirect.html", "redirect.css", "redirect.js"],
       "matches": ["<all_urls>"]
     }
   ]

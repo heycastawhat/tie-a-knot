@@ -4,23 +4,34 @@ const MESSAGES = [
   "Just tie a knot.",
   "You could be earning a badge right now.",
   "A reef knot a day keeps the game sites away.",
-  "This site has been yeeted into the void.",
+  "This site has been knotted into the void.",
   "Skill issue. Try knots instead.",
   "Your leader will never know. Your conscience will.",
   "Achievement unlocked: caught trying to play games.",
   "The clove hitch is literally more fun than this.",
   "You came here for games. Tie a knot.",
-  "Try animatedknots.com.",
-  "Error 403: Fun not permitted. Try rope instead.",
-  "Roses are red, your site is blocked, go tie a sheet bend.",
+  "Try animatedknots.com. Actually, you're going to.",
+  "Try rope instead.",
+  "Roses are red, your site is blocked, go tie a sheep shank.",
   "You have been intercepted by the Knot Police.",
-  "Alt+F4 won't save you. Neither will Ctrl+Z.",
   "Your patrol leader sends their regards.",
   "This knot in your plans is called a stopper knot.",
   "Be prepared... to learn some knots.",
   "Did you really think this would work?",
-  "Distraction neutralized. Deploying rope.",
-  "404: Games not found. Knots found instead."
+  "Rope.",
+  "Yeah nah.",
+  "Oh, you're back. Good luck.",
+  "Really?",
+  "I'm not mad, I'm just dissapointed.",
+  "If you can read this, you should be tying a figure-eight knot.",
+  "Every second here is a knot you could have mastered.",
+  "The only web you should be on is made of rope.",
+  "You can't escape the knot-iverse.",
+  "Reflect: How many knots do you know? How many could you learn today?",
+  "Reflect: What could you do instead of gaming on a troop laptop?",
+  "The Scout Law doesn't mention gaming, but it does mention being helpful. Teach someone a knot!",
+  "Your next adventure starts with a single knot.",
+  "...",
 ];
 
 const REDIRECT_SECONDS = 20;
@@ -65,7 +76,8 @@ function init() {
   const interval = setInterval(() => {
     remaining--;
     countdownEl.textContent = remaining;
-    progressEl.style.width = ((REDIRECT_SECONDS - remaining) / REDIRECT_SECONDS * 100) + "%";
+    progressEl.style.width =
+      ((REDIRECT_SECONDS - remaining) / REDIRECT_SECONDS) * 100 + "%";
 
     if (remaining <= 0) {
       clearInterval(interval);
