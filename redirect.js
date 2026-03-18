@@ -34,7 +34,7 @@ const MESSAGES = [
   "...",
 ];
 
-const REDIRECT_SECONDS = 20;
+const REDIRECT_SECONDS = 10;
 const REDIRECT_URL = "https://www.animatedknots.com";
 
 function getBlockedUrl() {
