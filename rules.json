@@ -217,5 +217,11 @@
   { "id": 216, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "regexFilter": ".*(vercel|netlify|render|replit).*app.*(game|unblo|proxy).*", "resourceTypes": ["main_frame", "sub_frame"] } },
   { "id": 217, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "regexFilter": ".*(github\\.io|pages\\.dev).*(game|unblo|proxy).*", "resourceTypes": ["main_frame", "sub_frame"] } },
   { "id": 218, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "regexFilter": ".*unblock.*(game|site|web).*", "resourceTypes": ["main_frame", "sub_frame"] } },
-  { "id": 219, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "*.workers.dev", "resourceTypes": ["main_frame", "sub_frame"] } }
+  { "id": 219, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "*.workers.dev", "resourceTypes": ["main_frame", "sub_frame"] } },
+  { "id": 220, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||7832907598873.smasnug.dev", "resourceTypes": ["main_frame"] } },
+  { "id": 221, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||723985470234.namnumber1.com", "resourceTypes": ["main_frame"] } },
+  { "id": 222, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||879342072.contentkeeperdoesnt.work", "resourceTypes": ["main_frame"] } },
+  { "id": 223, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||kortney-matronly-emeline.ngrok-free.dev", "resourceTypes": ["main_frame"] } },
+  { "id": 224, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "educationaltools", "resourceTypes": ["main_frame", "sub_frame"] } },
+  { "id": 225, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "*.ngrok-free.dev", "resourceTypes": ["main_frame", "sub_frame"] } }
 ]
