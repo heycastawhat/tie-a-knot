@@ -223,5 +223,7 @@
   { "id": 222, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||879342072.contentkeeperdoesnt.work", "resourceTypes": ["main_frame"] } },
   { "id": 223, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||kortney-matronly-emeline.ngrok-free.dev", "resourceTypes": ["main_frame"] } },
   { "id": 224, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "educationaltools", "resourceTypes": ["main_frame", "sub_frame"] } },
-  { "id": 225, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "*.ngrok-free.dev", "resourceTypes": ["main_frame", "sub_frame"] } }
+  { "id": 225, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "*.ngrok-free.dev", "resourceTypes": ["main_frame", "sub_frame"] } },
+  { "id": 226, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||zone.msn.com", "resourceTypes": ["main_frame"] } },
+  { "id": 227, "priority": 1, "action": { "type": "redirect", "redirect": { "extensionPath": "/redirect.html" } }, "condition": { "urlFilter": "||msn.com/en-us/play", "resourceTypes": ["main_frame"] } }
 ]
