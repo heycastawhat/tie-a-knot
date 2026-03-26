@@ -14,23 +14,28 @@ const BLOCKED_DOMAINS = [
   "plus.google.com"
 ];
 
-function logBlock(url) {
+const MAX_LOG_ENTRIES = 500;
+
+function logBlock(url, callback = () => {}) {
   const entry = {
     url: url,
     timestamp: new Date().toISOString()
   };
 
-  chrome.storage.local.get({ blockLog: [] }, (data) => {
-    const log = data.blockLog;
+  chrome.storage.local.get({ blockLog: [], totalBlocked: 0 }, (data) => {
+    const log = Array.isArray(data.blockLog) ? data.blockLog : [];
     log.unshift(entry);
-    // Keep last 500 entries
-    if (log.length > 500) log.length = 500;
-    chrome.storage.local.set({ blockLog: log });
-  });
+    if (log.length > MAX_LOG_ENTRIES) log.length = MAX_LOG_ENTRIES;
 
-  // Update total count
-  chrome.storage.local.get({ totalBlocked: 0 }, (data) => {
-    chrome.storage.local.set({ totalBlocked: data.totalBlocked + 1 });
+    chrome.storage.local.set(
+      { blockLog: log, totalBlocked: Number(data.totalBlocked || 0) + 1 },
+      () => {
+        if (chrome.runtime.lastError) {
+          console.warn("[Tie a Knot] Failed to persist block log:", chrome.runtime.lastError.message);
+        }
+        callback();
+      }
+    );
   });
 }
 
@@ -41,27 +46,28 @@ chrome.declarativeNetRequest.onRuleMatchedDebug?.addListener((info) => {
   }
 });
 
-// Fallback: listen for navigation to redirect.html (works without debug permission)
-chrome.webNavigation?.onCompleted?.addListener((details) => {
-  if (details.url && details.url.includes(chrome.runtime.getURL("redirect.html"))) {
-    // The blocked URL won't be directly available here, but we log it from the redirect page
-  }
-});
-
 // Listen for messages from redirect page to log blocks
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "LOG_BLOCK") {
-    logBlock(message.url);
-    sendResponse({ success: true });
+    logBlock(message.url, () => sendResponse({ success: true }));
+    return true;
   }
   if (message.type === "GET_LOG") {
     chrome.storage.local.get({ blockLog: [], totalBlocked: 0 }, (data) => {
+      if (chrome.runtime.lastError) {
+        sendResponse({ log: [], total: 0, error: chrome.runtime.lastError.message });
+        return;
+      }
       sendResponse({ log: data.blockLog, total: data.totalBlocked });
     });
     return true; // keep channel open for async response
   }
   if (message.type === "CLEAR_LOG") {
     chrome.storage.local.set({ blockLog: [], totalBlocked: 0 }, () => {
+      if (chrome.runtime.lastError) {
+        sendResponse({ success: false, error: chrome.runtime.lastError.message });
+        return;
+      }
       sendResponse({ success: true });
     });
     return true;
@@ -69,5 +75,5 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("[Back to Basics] Extension installed. " + BLOCKED_DOMAINS.length + " domains blocked.");
+  console.log("[Tie a Knot] Extension installed. " + BLOCKED_DOMAINS.length + " seed domains listed.");
 });

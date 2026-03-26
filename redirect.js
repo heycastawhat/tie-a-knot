@@ -22,7 +22,7 @@ const MESSAGES = [
   "Yeah nah.",
   "Oh, you're back. Good luck.",
   "Really?",
-  "I'm not mad, I'm just dissapointed.",
+  "I'm not mad, I'm just disappointed.",
   "If you can read this, you should be tying a figure-eight knot.",
   "Every second here is a knot you could have mastered.",
   "The only web you should be on is made of rope.",
@@ -36,15 +36,32 @@ const MESSAGES = [
 
 const REDIRECT_SECONDS = 10;
 const REDIRECT_URL = "https://www.animatedknots.com";
+const MAX_URL_DISPLAY_LENGTH = 180;
+
+function normalizeMaybeUrl(rawValue) {
+  if (!rawValue || typeof rawValue !== "string") return null;
+  try {
+    const parsed = new URL(rawValue);
+    const safeUrl = `${parsed.protocol}//${parsed.host}${parsed.pathname}`;
+    return safeUrl.length > MAX_URL_DISPLAY_LENGTH
+      ? `${safeUrl.slice(0, MAX_URL_DISPLAY_LENGTH - 3)}...`
+      : safeUrl;
+  } catch {
+    const trimmed = rawValue.trim();
+    if (!trimmed) return null;
+    return trimmed.length > MAX_URL_DISPLAY_LENGTH
+      ? `${trimmed.slice(0, MAX_URL_DISPLAY_LENGTH - 3)}...`
+      : trimmed;
+  }
+}
 
 function getBlockedUrl() {
-  // Try to extract from referrer or document.referrer
   const params = new URLSearchParams(window.location.search);
-  const fromParam = params.get("url");
+  const fromParam = normalizeMaybeUrl(params.get("url"));
   if (fromParam) return fromParam;
 
-  // Fallback: try referrer
-  if (document.referrer) return document.referrer;
+  const fromReferrer = normalizeMaybeUrl(document.referrer);
+  if (fromReferrer) return fromReferrer;
 
   return "unknown (nice try)";
 }
@@ -60,7 +77,11 @@ function init() {
 
   // Log this block to the background service worker
   try {
-    chrome.runtime?.sendMessage({ type: "LOG_BLOCK", url: blockedUrl });
+    chrome.runtime?.sendMessage({ type: "LOG_BLOCK", url: blockedUrl }, (response) => {
+      if (chrome.runtime.lastError || response?.error) {
+        console.warn("[Tie a Knot] Failed to log block.");
+      }
+    });
   } catch (e) {
     // Extension context may not be available
   }
